@@ -1,33 +1,36 @@
 /* Global Variables */
-
+const apikey="&appid=2c57d4b334fa1a6a98cc6b5e517476c1&units=metric";
+const baseurl="https://api.openweathermap.org/data/2.5/weather?zip=";
+ 
 // Create a new date instance dynamically with JS
-// let d = new Date();
-// let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let d = new Date();
+let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let Temp ;
 
 document.getElementById('generate').addEventListener('click',preformAction)
 
 
 
 function preformAction(e){
-  const animal=document.getElementById('name').value;
-  console.log(animal);
-  const fact=document.getElementById('fact').value;
-  console.log(fact);
+  const zipcode=document.getElementById('zipcode').value;
+  console.log(zipcode);
+  const feeling=document.getElementById('feeling').value;
+  console.log(feeling);
 
   
-
-    postAnimal('/addAnimal',{animal:animal,fact:fact}).then(
-      getAnimalData('/getAnimal').then(updateUI('/getAnimal')
+  getTemp(baseurl,zipcode,apikey).then(
+    postData('/addData',{zipcode:zipcode,feeling:feeling,date:newDate,temp:Temp}).then(updateUI('/getData')
       )
       
     )
+  
   
 
 
 
 
 }
-  const postAnimal = async ( url = '', data = {})=>{
+  const postData = async ( url = '', data = {})=>{
       const response = await fetch(url, {
       method: 'POST', 
       credentials: 'same-origin',
@@ -46,7 +49,7 @@ function preformAction(e){
       console.log("error", error);
       }
   }
-  const getAnimalData = async ( url = '')=>{
+  const getData = async ( url = '')=>{
 
     const res = await fetch(url);
     try {
@@ -68,7 +71,12 @@ const updateUI = async  ( url = '')=>{
   try {
     const newData = await res.json();
    
-    document.getElementById('recent').textContent=(newData.length-1!==0)?`Animal: ${newData[newData.length-2].animal} Fact: ${newData[newData.length-2].fact}`:"";
+    document.getElementById('recent').textContent=(newData.length-1!==0)?`
+    Zipcode: ${newData[newData.length-2].zipcode}, \n
+    Feeling: ${newData[newData.length-2].feeling},
+    Date: ${newData[newData.length-2].date}
+    Temp: ${Temp}
+    `:"";
     
 
 
@@ -80,3 +88,22 @@ const updateUI = async  ( url = '')=>{
 
 }
 
+const getTemp = async (baseurl,zipcode,apikey)=>{
+
+  const res = await fetch(baseurl+zipcode+apikey);
+  
+  try {
+    const newData = await res.json();
+    
+    Temp=newData.main.temp;
+    console.log(Temp,'Temp');
+    return newData;
+
+
+  }
+  catch(error) {
+    console.log("error", error);
+  }
+}
+
+// getTemp(baseurl,'85730',apikey);

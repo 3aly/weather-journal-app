@@ -1,7 +1,7 @@
 // Setup empty JS object to act as endpoint for all routes
 const projectData = [
 ];
-let newEntry={animal:'',fact:''};
+let newEntry={zipcode:'',feeling:'',date:'',temp:''};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -38,15 +38,17 @@ function listening() {
 const server = app.listen(port, listening);
 
 
-app.post('/addAnimal', addAnimal);
-app.get('/getAnimal',getData);
+app.post('/addData', addData);
+app.get('/getData',getData);
 
-function addAnimal(req,res){
+function addData(req,res){
 
-  newEntry.animal=req.body.animal;
-  newEntry.fact=req.body.fact;
+  newEntry.zipcode=req.body.zipcode;
+  newEntry.feeling=req.body.feeling;
+  newEntry.date=req.body.date;
+
  projectData.push(newEntry);
- newEntry={animal:'',fact:''};
+ newEntry={zipcode:'',feeling:'',date:'',temp:''};
  
 
 }
