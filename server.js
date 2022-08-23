@@ -1,7 +1,7 @@
 // Setup empty JS object to act as endpoint for all routes
 const projectData = [
 ];
-let newEntry={zipcode:'',feeling:'',date:'',temp:''};
+let newEntry={zipcode:'',city:'',feeling:'',date:'',temp:''};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -40,22 +40,35 @@ const server = app.listen(port, listening);
 
 app.post('/addData', addData);
 app.get('/getData',getData);
+app.get('/getAllData',getAllData);
+app.post('/clearAll', clearAll);
 
 function addData(req,res){
-
+    
   newEntry.zipcode=req.body.zipcode;
+  newEntry.city=req.body.city;
   newEntry.feeling=req.body.feeling;
+  newEntry.temp=req.body.temp;
   newEntry.date=req.body.date;
 
  projectData.push(newEntry);
- newEntry={zipcode:'',feeling:'',date:'',temp:''};
+ newEntry={};
  
 
 }
+function clearAll(req,res){
+    
+   
+  
+   projectData=req.body;
+   
+
+  }
 
 
 function getData(req,res){
-
+    res.send(projectData[projectData.length-1]);
+}
+function getAllData(req,res){
     res.send(projectData);
-    console.log(projectData,'data');
 }
