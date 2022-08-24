@@ -60,8 +60,8 @@ function clearAll(req,res){
     
    
   
-   projectData=req.body;
-   
+   projectData.length=0;
+   res.send("NO DATA!");
 
   }
 
