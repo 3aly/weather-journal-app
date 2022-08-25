@@ -22,6 +22,6 @@ This is an web app to get the temperature based on the entered zipcode
  
   1. enter your zipcode
   2. click "Weather Me!" to get the data from the API
-  3. click on "updateUI" to show the retrived data from the API
+  3. click on "UpdateUI" to show the retrived data from the API
   4. click on "Show all data" to get all the saved data in the server
   5. click on "Clear all data" to delete the data  saved at the server
