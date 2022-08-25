@@ -83,7 +83,7 @@ function preformUpdate(){
   });
 
     try {
-      const newData = "NO DATA!";
+      const newData = "Data Cleared!";
       document.getElementById('recent').textContent=newData;
 
     }catch(error) {
