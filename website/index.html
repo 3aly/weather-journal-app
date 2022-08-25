@@ -22,14 +22,16 @@
   
     <div class="mb-3">
       <label for="zipcode" class="form-label">Enter Zipcode here</label>
-      <input type="text" class="form-control" id="zipcode" aria-describedby="emailHelp">
+      <input type="text" class="form-control" id="zipcode" placeholder="Enter Zipcode"aria-describedby="emailHelp">
     </div>
-    <select id="units" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-      <option selected>Choose Unit</option>
-      <option value="imperial">Imperial</option>
-      <option value="metric">Metric</option>
-      
-    </select>
+    <div class="form-floating ">
+      <select class="form-select" id="units" aria-label="Floating label select example">
+        <option selected></option>
+        <option value="imperial">Imperial</option>
+        <option value="metric">Metric</option>
+      </select>
+      <label for="floatingSelect pb-5" class="pt-1">Choose the Unit</label>
+    </div>
     
     <div class="mb-3">
       <label for="feeling" class="form-label">How are you feeling today?</label>

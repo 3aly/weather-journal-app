@@ -37,12 +37,13 @@ function listening() {
 
 const server = app.listen(port, listening);
 
-
+//setup GET POST routes
 app.post('/addData', addData);
 app.get('/getData',getData);
 app.get('/getAllData',getAllData);
 app.post('/clearAll', clearAll);
 
+//get all the data for the client side and create a new object then push it to the projectData
 function addData(req,res){
     
   newEntry.zipcode=req.body.zipcode;
@@ -56,19 +57,24 @@ function addData(req,res){
  
 
 }
+
+//set the projectData array length to 0 to clear it
 function clearAll(req,res){
-    
-   
-  
+      
    projectData.length=0;
    res.send("NO DATA!");
 
   }
 
 
+//send the last object in the projectData array to the client side
 function getData(req,res){
+
     res.send(projectData[projectData.length-1]);
 }
+
+//send all the projectData array to the client side
 function getAllData(req,res){
+    
     res.send(projectData);
 }
